@@ -26,7 +26,7 @@ def story_data():
                     text_paths=[CURRENT_DIR / "corpus" / "jp_text.txt"],
                     font_dir=CURRENT_DIR / "font",
                     font_size=(20, 30),
-                    # num_word=(2, 3),
+                    length=(3,39)
                 ),
             ),
             corpus_effects=Effects(Line(0.9, thickness=(2, 5))),
