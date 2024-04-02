@@ -23,7 +23,7 @@ def story_data():
             perspective_transform=NormPerspectiveTransformCfg(20, 20, 1.5),
             corpus=CharCorpus(
                 CharCorpusCfg(
-                    text_paths=[CURRENT_DIR / "corpus" / "eng_text.txt"],
+                    text_paths=[CURRENT_DIR / "corpus" / "jp_text.txt"],
                     font_dir=CURRENT_DIR / "font",
                     font_size=(20, 30),
                     # num_word=(2, 3),
