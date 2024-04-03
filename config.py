@@ -26,17 +26,16 @@ def story_data():
                 CharCorpusCfg(
                     text_paths=[CURRENT_DIR / "corpus" / "jp_text.txt"],
                     font_dir=CURRENT_DIR / "font",
-                    font_size=(66, 68),
-                    length=(3,39)
+                    font_size=(35, 68),
+                    length=(20,39)
                 ),
             ),
-            corpus_effects=Effects(Line(0.2, thickness=(2, 5),line_pos_p=(0, 1, 0, 0, 0, 0, 0, 0, 0, 0))),
-            # corpus_effects=Effects(ImgAugEffect(p=0.2,aug=iaa.GaussianBlur(sigma=(0.5, 1.5)))),
-            # corpus_effects=Effects(Padding(p=1, w_ratio=[0.015, 0.021], h_ratio=[0.3, 0.35], center=True)),
+            # corpus_effects=Effects(Line(0.2, thickness=(2, 5),line_pos_p=(0, 1, 0, 0, 0, 0, 0, 0, 0, 0))),  #Underline
+            corpus_effects=Effects(ImgAugEffect(p=1,aug=iaa.GaussianBlur(sigma=(1.35, 1.35)))),   #Gaussian Blur
+            # corpus_effects=Effects(Padding(p=1, w_ratio=[0.015, 0.021], h_ratio=[0.3, 0.35], center=True)), #Add padding
             gray=False,
             text_color_cfg=SimpleTextColorCfg(),
         ),
-    )
 
 
 configs = [story_data()]
