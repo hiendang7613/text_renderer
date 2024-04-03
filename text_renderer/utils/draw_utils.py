@@ -3,7 +3,7 @@ from typing import Tuple, Union
 from PIL import ImageDraw, Image
 from PIL.Image import Image as PILImage
 import numpy as np
-
+import random
 from text_renderer.utils.font_text import FontText
 
 
@@ -124,12 +124,13 @@ def _draw_text_on_bg(
     draw = ImageDraw.Draw(text_mask)
 
     xy = font_text.xy
-
+    random_strike_width=random.randint(0,1)
     # TODO: figure out anchor
     draw.text(
         xy,
         font_text.text,
-        stroke_width=2,
+        stroke_width=random_strike_width,
+        stroke_fill=text_color,
         font=font_text.font,
         fill=text_color,
         anchor=None,
