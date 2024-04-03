@@ -30,7 +30,9 @@ def story_data():
                     length=(3,39)
                 ),
             ),
-            corpus_effects=Effects(Line(0.5, thickness=(2, 5),line_pos_p=(0, 1, 0, 0, 0, 0, 0, 0, 0, 0))),
+            corpus_effects=Effects(Line(0.2, thickness=(2, 5),line_pos_p=(0, 1, 0, 0, 0, 0, 0, 0, 0, 0))),
+            # corpus_effects=Effects(ImgAugEffect(p=0.2,aug=iaa.GaussianBlur(sigma=(0.5, 1.5)))),
+            #corpus_effects=Effects(Padding(p=1, w_ratio=[0.01, 0.05], h_ratio=[0.6, 0.71], center=True)),
             gray=False,
             text_color_cfg=SimpleTextColorCfg(),
         ),
