@@ -66,7 +66,10 @@ class DBWriterProcess(Process):
 
 
 def generate_img(data_queue):
-    data = render()
+    try:
+      data = render()
+    except:
+      data = None
     if data is not None:
         data_queue.put({"image": data[0], "label": data[1]})
 
