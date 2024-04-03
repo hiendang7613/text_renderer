@@ -36,6 +36,6 @@ def story_data():
             gray=False,
             text_color_cfg=SimpleTextColorCfg(),
         ),
-
+    )
 
 configs = [story_data()]
