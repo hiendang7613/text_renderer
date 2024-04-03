@@ -31,7 +31,7 @@ def story_data():
                 ),
             ),
             # corpus_effects=Effects(Line(0.2, thickness=(2, 5),line_pos_p=(0, 1, 0, 0, 0, 0, 0, 0, 0, 0))),  #Underline
-            corpus_effects=Effects(ImgAugEffect(p=1,aug=iaa.GaussianBlur(sigma=(1.35, 1.35)))),   #Gaussian Blur
+            corpus_effects=Effects(ImgAugEffect(p=1,aug=iaa.GaussianBlur(sigma=(0.5, 1.35)))),   #Gaussian Blur
             # corpus_effects=Effects(Padding(p=1, w_ratio=[0.015, 0.021], h_ratio=[0.3, 0.35], center=True)), #Add padding
             gray=False,
             text_color_cfg=SimpleTextColorCfg(),
