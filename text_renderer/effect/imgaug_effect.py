@@ -28,44 +28,6 @@ class ImgAugEffect(Effect):
         # TODO: test self.aug.augment_bounding_boxes()
         return Image.fromarray(self.aug.augment_image(word_img)), text_bbox
 
-class Dilation(Effect):
-    """
-    Apply imgaug(https://github.com/aleju/imgaug) Augmenter on image.
-    """
-
-    def __init__(self, p=1.0, aug: Augmenter = None):
-        super().__init__(p)
-        self.aug = aug
-
-    def apply(self, img: PILImage, text_bbox: BBox) -> Tuple[PILImage, BBox]:
-        # if self.aug is None:
-        #     return img, text_bbox
-
-        word_img = np.array(img)
-        kernel = np.ones((3,3),np.uint8)  # You can adjust the size of the kernel as needed
-        dilation_word_img = cv2.dilate(word_img_np, kernel, iterations = 1)
-        # TODO: test self.aug.augment_bounding_boxes()
-        
-        return Image.fromarray(dilation_word_img), text_bbox
-
-
-class Erosion(Effect):
-    """
-    Apply imgaug(https://github.com/aleju/imgaug) Augmenter on image.
-    """
-
-    def __init__(self, p=1.0, aug: Augmenter = None):
-        super().__init__(p)
-        self.aug = aug
-
-    def apply(self, img: PILImage, text_bbox: BBox) -> Tuple[PILImage, BBox]:
-        if self.aug is None:
-            return img, text_bbox
-
-        word_img = np.array(img)
-        # TODO: test self.aug.augment_bounding_boxes()
-        return Image.fromarray(self.aug.augment_image(word_img)), text_bbox
-
 
 class Emboss(ImgAugEffect):
     def __init__(self, p=1.0, alpha=(0, 9, 1.0), strength=(1.5, 1.6)):
