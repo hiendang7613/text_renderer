@@ -129,6 +129,7 @@ def _draw_text_on_bg(
     draw.text(
         xy,
         font_text.text,
+        stroke_width=2,
         font=font_text.font,
         fill=text_color,
         anchor=None,
