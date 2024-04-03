@@ -29,7 +29,7 @@ def story_data():
                     length=(3,39)
                 ),
             ),
-            corpus_effects=Effects(Line(0.9, thickness=(2, 5))),
+            corpus_effects=Effects(Line(0.5, thickness=(2, 5),line_pos_p=(0, 1, 0, 0, 0, 0, 0, 0, 0, 0))),
             gray=False,
             text_color_cfg=SimpleTextColorCfg(),
         ),
