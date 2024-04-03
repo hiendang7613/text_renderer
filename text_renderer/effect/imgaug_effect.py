@@ -38,12 +38,15 @@ class Dilation(Effect):
         self.aug = aug
 
     def apply(self, img: PILImage, text_bbox: BBox) -> Tuple[PILImage, BBox]:
-        if self.aug is None:
-            return img, text_bbox
+        # if self.aug is None:
+        #     return img, text_bbox
 
         word_img = np.array(img)
+        kernel = np.ones((3,3),np.uint8)  # You can adjust the size of the kernel as needed
+        dilation_word_img = cv2.dilate(word_img_np, kernel, iterations = 1)
         # TODO: test self.aug.augment_bounding_boxes()
-        return Image.fromarray(self.aug.augment_image(word_img)), text_bbox
+        
+        return Image.fromarray(dilation_word_img), text_bbox
 
 
 class Erosion(Effect):
