@@ -12,7 +12,7 @@ from text_renderer.config import (
 )
 
 CURRENT_DIR = Path(os.path.abspath(os.path.dirname(__file__)))
-
+import imgaug.augmenters as iaa
 
 def story_data():
     return GeneratorCfg(
