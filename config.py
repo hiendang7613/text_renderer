@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-
+import text_renderer
 from text_renderer.effect import *
 from text_renderer.corpus import *
 from text_renderer.config import (
@@ -10,32 +10,50 @@ from text_renderer.config import (
     SimpleTextColorCfg,
     UniformPerspectiveTransformCfg,
 )
+from text_renderer.effect.curve import Curve
 
-CURRENT_DIR = Path(os.path.abspath(os.path.dirname(__file__)))
+CURRENT_DIR = Path('/content/text_renderer/workspace')
 import imgaug.augmenters as iaa
+
+text_effect_cfg = Effects([
+    text_renderer.effect.DropoutRand(p=0.1), #Drop pixel
+    Curve(p=0.2, period=180, amplitude=(7,8)), # Curve
+    Line(0.2, thickness=(2, 5),line_pos_p=(0, 1, 0, 0, 0, 0, 0, 0, 0, 0)),  #Underline
+    ImgAugEffect(p=0,aug=iaa.GaussianBlur(sigma=(0.5, 1.35))),   #Gaussian Blur
+    Padding(p=1, w_ratio=[0.015, 0.021], h_ratio=[0.3, 0.35], center=True), #Add padding
+])
+# bg_effect_cfg = #
+
+my_corpus = CharCorpus(
+    CharCorpusCfg(
+        text_paths=[CURRENT_DIR / "corpus" / "jp_text.txt"],
+        length=(3,39),
+        font_size=(35, 68),
+
+        font_dir=CURRENT_DIR / "font",
+        text_color_cfg=SimpleTextColorCfg(alpha=(110, 255)),
+        char_spacing = (-0.1, 0.3),
+
+        # horizontal= False  # horizontal
+    ),
+)
 
 def story_data():
     return GeneratorCfg(
-        num_image=10,
+        num_image=1000000,
         save_dir=CURRENT_DIR / "output",
         render_cfg=RenderCfg(
-            bg_dir=CURRENT_DIR / "bg",
-            height=70,
-            perspective_transform=UniformPerspectiveTransformCfg(12, 12, 1.2),
-            corpus=CharCorpus(
-                CharCorpusCfg(
-                    text_paths=[CURRENT_DIR / "corpus" / "jp_text.txt"],
-                    font_dir=CURRENT_DIR / "font",
-                    font_size=(35, 68),
-                    length=(20,39)
-                ),
-            ),
-            # corpus_effects=Effects(Line(0.2, thickness=(2, 5),line_pos_p=(0, 1, 0, 0, 0, 0, 0, 0, 0, 0))),  #Underline
-            corpus_effects=Effects(ImgAugEffect(p=1,aug=iaa.GaussianBlur(sigma=(0.5, 1.35)))),   #Gaussian Blur
-            # corpus_effects=Effects(Padding(p=1, w_ratio=[0.015, 0.021], h_ratio=[0.3, 0.35], center=True)), #Add padding
-            gray=False,
-            text_color_cfg=SimpleTextColorCfg(),
-        ),
+              corpus= [my_corpus, my_corpus],
+              corpus_effects=[text_effect_cfg, text_effect_cfg],
+              bg_dir=CURRENT_DIR / "bg",
+              layout=text_renderer.layout.ExtraTextLineLayout(bottom_prob=0.05),
+              perspective_transform=UniformPerspectiveTransformCfg(12, 12, 1.2), # rotate
+              # render_effects=bg_effect_cfg
+              text_color_cfg=SimpleTextColorCfg(),
+              height=70,
+              gray=False,
+              return_bg_and_mask=False
+          ),
     )
 
 configs = [story_data()]
