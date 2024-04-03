@@ -8,6 +8,7 @@ from text_renderer.config import (
     NormPerspectiveTransformCfg,
     GeneratorCfg,
     SimpleTextColorCfg,
+    UniformPerspectiveTransformCfg,
 )
 
 CURRENT_DIR = Path(os.path.abspath(os.path.dirname(__file__)))
@@ -20,7 +21,7 @@ def story_data():
         render_cfg=RenderCfg(
             bg_dir=CURRENT_DIR / "bg",
             height=32,
-            perspective_transform=NormPerspectiveTransformCfg(20, 20, 1.5),
+            perspective_transform=UniformPerspectiveTransformCfg(12, 12, 1.2),
             corpus=CharCorpus(
                 CharCorpusCfg(
                     text_paths=[CURRENT_DIR / "corpus" / "jp_text.txt"],
